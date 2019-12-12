@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: loja
+eureka:
+  instance:
+    prefer-ip-address: true
