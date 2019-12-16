@@ -1,6 +1,7 @@
 package br.com.alura.loja.controller;
 
 import br.com.alura.loja.controller.dto.CompraDTO;
+import br.com.alura.loja.modelo.Compra;
 import br.com.alura.loja.service.CompraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +17,8 @@ public class CompraController {
     private CompraService service;
 
     @PostMapping
-    public void realizaCompra(@RequestBody CompraDTO compra) {
-        service.realizeCompra(compra);
+    public Compra realizaCompra(@RequestBody CompraDTO compra) {
+        return service.realizeCompra(compra);
     }
 
 }
