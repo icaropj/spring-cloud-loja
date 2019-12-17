@@ -6,4 +6,4 @@ spring:
       server:
         git:
           uri: https://github.com/icaropj/ms-config
-          search-paths: fornecedor
+          search-paths: fornecedor, loja

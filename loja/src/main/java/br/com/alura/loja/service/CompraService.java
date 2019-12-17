@@ -4,6 +4,7 @@ import br.com.alura.loja.controller.dto.CompraDTO;
 import br.com.alura.loja.controller.dto.InfoFornecedorDTO;
 import br.com.alura.loja.controller.dto.InfoPedidoDTO;
 import br.com.alura.loja.modelo.Compra;
+import br.com.alura.loja.repository.CompraRepository;
 import br.com.alura.loja.service.client.FornecedorClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
@@ -19,6 +20,13 @@ public class CompraService {
     @Autowired
     private FornecedorClient fornecedorClient;
 
+    @Autowired
+    private CompraRepository compraRepository;
+
+    public Compra getById(Long id) {
+        return compraRepository.findById(id).orElse(new Compra());
+    }
+
     @HystrixCommand(fallbackMethod = "realizaCompraFallback")
     public Compra realizeCompra(CompraDTO compra) {
         LOG.info("buscando informações do fornecedor de {}", compra.getEndereco().getEstado());
@@ -32,8 +40,7 @@ public class CompraService {
         compraSalva.setTempoDePreparo(pedido.getTempoDePreparo());
         compraSalva.setEnderecoDestino(compra.getEndereco().toString());
 
-
-
+        compraRepository.save(compraSalva);
 //        try {
 //            Thread.sleep(2000);
 //        } catch (InterruptedException e) {

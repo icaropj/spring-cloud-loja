@@ -4,10 +4,7 @@ import br.com.alura.loja.controller.dto.CompraDTO;
 import br.com.alura.loja.modelo.Compra;
 import br.com.alura.loja.service.CompraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/compra")
@@ -20,6 +17,11 @@ public class CompraController {
     public Compra realizaCompra(@RequestBody CompraDTO compra) {
 
         return service.realizeCompra(compra);
+    }
+
+    @GetMapping("/{id}")
+    public Compra getById(Long id) {
+        return service.getById(id);
     }
 
 }
