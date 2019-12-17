@@ -41,6 +41,7 @@ public class CompraService {
         compraRepository.save(compraSalva);
         compra.setId(compraSalva.getId());
 
+        //TODO: token through ms
         LOG.info("buscando informações do fornecedor de {}", compra.getEndereco().getEstado());
         InfoFornecedorDTO infoPorEstado = fornecedorClient.getInfoPorEstado(compra.getEndereco().getEstado());
 
