@@ -1,2 +1,9 @@
 server:
   port: 8088
+
+eureka:
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: 'auth'
