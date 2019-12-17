@@ -1,9 +1,14 @@
 package br.com.alura.loja.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompraDTO {
+
+    @JsonIgnore
+    private Long id;
 
     private List<ItemCompraDTO> itens = new ArrayList<>();
 
@@ -23,5 +28,13 @@ public class CompraDTO {
 
     public void setEndereco(EnderecoDTO endereco) {
         this.endereco = endereco;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

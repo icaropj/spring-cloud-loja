@@ -2,6 +2,7 @@ package br.com.alura.loja.service;
 
 import br.com.alura.loja.controller.dto.*;
 import br.com.alura.loja.modelo.Compra;
+import br.com.alura.loja.modelo.CompraState;
 import br.com.alura.loja.repository.CompraRepository;
 import br.com.alura.loja.service.client.FornecedorClient;
 import br.com.alura.loja.service.client.TransportadorClient;
@@ -34,11 +35,21 @@ public class CompraService {
 
     @HystrixCommand(fallbackMethod = "realizaCompraFallback", threadPoolKey = "realizaCompraThreadPool")
     public Compra realizeCompra(CompraDTO compra) {
+        Compra compraSalva = new Compra();
+        compraSalva.setCompraState(CompraState.RECEBIDO);
+        compraSalva.setEnderecoDestino(compra.getEndereco().toString());
+        compraRepository.save(compraSalva);
+        compra.setId(compraSalva.getId());
+
         LOG.info("buscando informações do fornecedor de {}", compra.getEndereco().getEstado());
         InfoFornecedorDTO infoPorEstado = fornecedorClient.getInfoPorEstado(compra.getEndereco().getEstado());
 
         LOG.info("realizando um pedido");
         InfoPedidoDTO pedido = fornecedorClient.realizaPedido(compra.getItens());
+        compraSalva.setPedidoId(pedido.getId());
+        compraSalva.setTempoDePreparo(pedido.getTempoDePreparo());
+        compraSalva.setCompraState(CompraState.PEDIDO_REALIZADO);
+        compraRepository.save(compraSalva);
 
         InfoEntregaDTO entregaDTO = new InfoEntregaDTO();
         entregaDTO.setPedidoId(pedido.getId());
@@ -46,14 +57,11 @@ public class CompraService {
         entregaDTO.setEnderecoOrigem(infoPorEstado.getEndereco());
         entregaDTO.setEnderecoDestino(compra.getEndereco().toString());
         VoucherDTO voucher = transportadorClient.reservaEntrega(entregaDTO);
-
-        Compra compraSalva = new Compra();
-        compraSalva.setPedidoId(pedido.getId());
-        compraSalva.setTempoDePreparo(pedido.getTempoDePreparo());
-        compraSalva.setEnderecoDestino(compra.getEndereco().toString());
+        compraSalva.setCompraState(CompraState.RESERVA_ENTREGA_REALIZADA);
         compraSalva.setDataParaEntrega(voucher.getPrevisaoParaEntrega());
         compraSalva.setVoucher(voucher.getNumero());
         compraRepository.save(compraSalva);
+
 //        try {
 //            Thread.sleep(2000);
 //        } catch (InterruptedException e) {
@@ -64,6 +72,9 @@ public class CompraService {
     }
 
     public Compra realizaCompraFallback(CompraDTO compraDTO) {
+        if (compraDTO.getId() != null) {
+            return compraRepository.findById(compraDTO.getId()).get();
+        }
         Compra compraFallback = new Compra();
         compraFallback.setEnderecoDestino(compraDTO.getEndereco().toString());
         return compraFallback;

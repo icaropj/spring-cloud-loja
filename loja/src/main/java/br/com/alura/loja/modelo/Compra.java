@@ -1,13 +1,15 @@
 package br.com.alura.loja.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 public class Compra {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Long pedidoId;
 
     private Integer tempoDePreparo;
@@ -17,6 +19,9 @@ public class Compra {
     private LocalDate dataParaEntrega;
 
     private Long voucher;
+
+    @Enumerated
+    private CompraState compraState;
 
     public Long getPedidoId() {
         return pedidoId;
@@ -56,5 +61,21 @@ public class Compra {
 
     public void setVoucher(Long voucher) {
         this.voucher = voucher;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CompraState getCompraState() {
+        return compraState;
+    }
+
+    public void setCompraState(CompraState compraState) {
+        this.compraState = compraState;
     }
 }
