@@ -25,7 +25,7 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("loja")
-                .secret("lojapwd")
+                .secret(passwordEncoder.encode("lojapwd"))
                 .authorizedGrantTypes("password")
                 .scopes("web", "mobile");
     }
