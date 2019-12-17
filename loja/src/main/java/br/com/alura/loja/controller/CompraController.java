@@ -20,7 +20,7 @@ public class CompraController {
     }
 
     @GetMapping("/{id}")
-    public Compra getById(Long id) {
+    public Compra getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
