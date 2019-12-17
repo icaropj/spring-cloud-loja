@@ -32,13 +32,13 @@ public class CompraService {
         compraSalva.setTempoDePreparo(pedido.getTempoDePreparo());
         compraSalva.setEnderecoDestino(compra.getEndereco().toString());
 
+
+
 //        try {
 //            Thread.sleep(2000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-
-        System.out.println(infoPorEstado.getEndereco());
 
         return compraSalva;
     }
