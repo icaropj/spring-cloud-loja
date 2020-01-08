@@ -2,7 +2,7 @@
 
 ### Improvements after course is finished:
 * [x] ~~Auth Server through zuul~~
-* [x] Monitoring with Spring Boot Actuator
+* [x] ~~Monitoring with Spring Boot Actuator~~
 * [ ] Spring Boot Admin
 * [ ] Documentation with Swagger
 * [ ] Cache
