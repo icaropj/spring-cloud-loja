@@ -5,6 +5,6 @@
 * [x] ~~Monitoring with Spring Boot Actuator~~
 * [x] ~~Spring Boot Admin~~
 * [x] ~~Documentation with Swagger~~
-* [ ] Cache
+* [x] ~~Cache~~
 * [ ] JWT
 * [ ] User in database(It's currently in memory)
