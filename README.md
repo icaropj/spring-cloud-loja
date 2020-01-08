@@ -1,6 +1,6 @@
 # spring-cloud-loja
 
-### Improvements after course is finished:
+### Improvements after course is done:
 * [x] ~~Auth Server through zuul~~
 * [x] ~~Monitoring with Spring Boot Actuator~~
 * [x] ~~Spring Boot Admin~~
