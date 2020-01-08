@@ -13,7 +13,14 @@ management:
       exposure:
         include:
         - "routes"
+        - "health"
 zuul:
   sensitive-headers:
   - Cookie, Authorization
-
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+  application:
+    name: zuul

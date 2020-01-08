@@ -7,3 +7,7 @@ eureka:
 spring:
   application:
     name: 'auth'
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090

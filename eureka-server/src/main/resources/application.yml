@@ -8,3 +8,11 @@ eureka:
     prefer-ip-address: true
 server:
   port: 8761
+
+spring:
+  application:
+    name: eureka
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090

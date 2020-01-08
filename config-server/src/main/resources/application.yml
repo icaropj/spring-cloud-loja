@@ -7,3 +7,9 @@ spring:
         git:
           uri: https://github.com/icaropj/ms-config
           search-paths: fornecedor, loja, transportador
+  application:
+    name: 'config-server'
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090

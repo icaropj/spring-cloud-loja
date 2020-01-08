@@ -6,3 +6,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
