@@ -4,7 +4,7 @@
 * [x] ~~Auth Server through zuul~~
 * [x] ~~Monitoring with Spring Boot Actuator~~
 * [x] ~~Spring Boot Admin~~
-* [ ] Documentation with Swagger
+* [x] ~~Documentation with Swagger~~
 * [ ] Cache
 * [ ] JWT
 * [ ] User in database(It's currently in memory)
